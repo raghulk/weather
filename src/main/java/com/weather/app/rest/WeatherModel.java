@@ -89,14 +89,6 @@ public class WeatherModel {
     this.temperatureLowTime = temperatureLowTime;
   }
 
-  public String getDaily() {
-    return daily;
-  }
-
-  public void setDaily(String daily) {
-    this.daily = daily;
-  }
-
   private String latitude;
   private String longitude;
   private String date;
@@ -108,5 +100,4 @@ public class WeatherModel {
   private String temperatureHighTime;
   private String temperatureLow;
   private String temperatureLowTime;
-  private String daily;
 }
