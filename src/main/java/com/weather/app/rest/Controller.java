@@ -36,7 +36,6 @@ public class Controller {
     ResponseEntity<String> response = restTemplate.getForEntity("https://api.darksky.net/forecast/0b67f8f549800f7bdeccc85500ba9324/"+latitude+","+longitude, String.class);
 //    WeatherModel currentWeatherData = restTemplate.getForObject("https://api.darksky.net/forecast/0b67f8f549800f7bdeccc85500ba9324/"+latitude+","+longitude, WeatherModel.class);
 //    WeatherModel oneYearBackWeatherData = restTemplate.getForObject("https://api.darksky.net/forecast/0b67f8f549800f7bdeccc85500ba9324/"+latitude+","+longitude, WeatherModel.class);
-//    System.out.println(response.getBody());
     JsonNode responseNode = new ObjectMapper().readTree(Objects.requireNonNull(response.getBody()));
     WeatherModel currentWeatherData = new WeatherModel();
     currentWeatherData.setLongitude(longitude);
