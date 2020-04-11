@@ -4,7 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +29,15 @@ public class Controller {
     return new RestTemplate();
   }
 
-  @RequestMapping
-  public ArrayList<WeatherModel> getWeatherData() throws IOException {
-    long currentTime = System.currentTimeMillis()/1000;
-    System.out.println(currentTime);
-    String oneYearMilliS = "31556952";
-    long oneYear = Long.parseLong(oneYearMilliS);
-    long oneYearBackTime = currentTime - oneYear;
+  @RequestMapping(value = "/weather-data")
+  public ArrayList<WeatherModel> getWeatherData() throws IOException, ParseException {
+    Date currentDate = new Date();
+    Date dateOneYearBack = currentDate;
+    dateOneYearBack.setYear(currentDate.getYear() - 1);
     String latitude = "42.3";
     String longitude = "-32.8";
-    ResponseEntity<String> response = restTemplate.getForEntity("https://api.darksky.net/forecast/0b67f8f549800f7bdeccc85500ba9324/"+ latitude + "," + longitude + "," + currentTime, String.class);
-    ResponseEntity<String> responseOneYearBack = restTemplate.getForEntity("https://api.darksky.net/forecast/0b67f8f549800f7bdeccc85500ba9324/"+ latitude + "," + longitude + "," + oneYearBackTime, String.class);
+    ResponseEntity<String> response = restTemplate.getForEntity("https://api.darksky.net/forecast/0b67f8f549800f7bdeccc85500ba9324/"+ latitude + "," + longitude + "," + new Date().getTime()/1000, String.class);
+    ResponseEntity<String> responseOneYearBack = restTemplate.getForEntity("https://api.darksky.net/forecast/0b67f8f549800f7bdeccc85500ba9324/"+ latitude + "," + longitude + "," + dateOneYearBack.getTime()/1000, String.class);
     JsonNode responseNode = new ObjectMapper().readTree(Objects.requireNonNull(response.getBody()));
     WeatherModel currentWeatherData = new WeatherModel();
     currentWeatherData.setLongitude(longitude);
