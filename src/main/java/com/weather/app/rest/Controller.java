@@ -54,7 +54,6 @@ public class Controller {
       currentWeatherData.setTemperatureLowTime(dailyNode.get("temperatureLowTime").toString());
     }
 
-//    currentWeatherData.setSunRiseTime(responseNode.get("dailyData").get("data").toString());
     ArrayList<WeatherModel> hey = new ArrayList<>();
     hey.add(currentWeatherData);
 //    hey.add(oneYearBackWeatherData);
