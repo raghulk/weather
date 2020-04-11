@@ -30,8 +30,8 @@ public class Controller {
   public ArrayList<WeatherModel> getWeatherData() throws IOException {
     long currentTime = System.currentTimeMillis()/1000;
     System.out.println(currentTime);
-    String oneYearMilliS = "31556952000";
-    long oneYear = Long.parseLong(oneYearMilliS)/1000;
+    String oneYearMilliS = "31556952";
+    long oneYear = Long.parseLong(oneYearMilliS);
     long oneYearBackTime = currentTime - oneYear;
     String latitude = "42.3";
     String longitude = "-32.8";
