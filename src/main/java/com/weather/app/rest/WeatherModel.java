@@ -1,5 +1,7 @@
 package com.weather.app.rest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class WeatherModel {
   public String getLatitude() {
     return latitude;
