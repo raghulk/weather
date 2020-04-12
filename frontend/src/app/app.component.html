@@ -1,1 +1,60 @@
-<button (click)="getData()">Click me</button>
+<input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+<button mat-button (click)="findMe()">Get Current Location</button>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="loaded">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{date}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="time">
+    <mat-header-cell *matHeaderCellDef> Time</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{date.getHours()}}:{{date.getMinutes()}}:{{date.getSeconds()}} </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="temperature">
+    <mat-header-cell *matHeaderCellDef> Temperature</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.temperature}} </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="sunriseTime">
+    <mat-header-cell *matHeaderCellDef> Sunrise Time</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.sunRiseTime}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="sunsetTime">
+    <mat-header-cell *matHeaderCellDef> Sunset Time</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.sunsetTime}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="temperatureHigh">
+    <mat-header-cell *matHeaderCellDef> Temperature High</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.temperatureHigh}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="temperatureHighTime">
+    <mat-header-cell *matHeaderCellDef> Temperature High Time</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.temperatureHighTime}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="temperatureLow">
+    <mat-header-cell *matHeaderCellDef> Temperature Low</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.temperatureLow}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="temperatureLowTime">
+    <mat-header-cell *matHeaderCellDef> Temperature Low Time</mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.temperatureLowTime}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
