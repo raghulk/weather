@@ -1,4 +1,13 @@
-<input ngx-google-places-autocomplete  #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+<form [formGroup]="fb" >
+  <mat-form-field floatLabel="never">
+    <input matInput type="text" placeholder="Pick one" [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
 <button mat-button (click)="findMe()">Get Current Location</button>
 
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="loaded">
@@ -15,7 +24,8 @@
   <!-- Name Column -->
   <ng-container matColumnDef="time">
     <mat-header-cell *matHeaderCellDef> Time</mat-header-cell>
-    <mat-cell mat-cell *matCellDef="let element"> {{date.getHours()}}:{{date.getMinutes()}}:{{date.getSeconds()}} </mat-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{date.getHours()}}:{{date.getMinutes()}}
+      :{{date.getSeconds()}} </mat-cell>
   </ng-container>
 
   <!-- Weight Column -->

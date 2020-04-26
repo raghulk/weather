@@ -1,7 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Address} from "ngx-google-places-autocomplete/objects/address";
-
+import {Observable} from "rxjs";
+import {map, startWith} from "rxjs/operators";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -41,6 +43,26 @@ export class AppComponent {
       this.ELEMENT_DATA = res as Array<WeatherData>;
       this.dataSource = this.ELEMENT_DATA;
     })
+  }
+
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
+  fb: FormGroup = new FormGroup({
+    firstName: this.myControl
+  });
+
+  ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => (value as string).length > 0 ? this._filter(value) : [])
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) >= 0);
   }
 }
 

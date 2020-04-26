@@ -9,6 +9,10 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {GooglePlaceModule} from "ngx-google-places-autocomplete";
+import {MatInputModule} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import {GooglePlaceModule} from "ngx-google-places-autocomplete";
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
